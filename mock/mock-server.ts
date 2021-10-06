@@ -32,7 +32,7 @@ app.use((req, res, next) => {
   next()
 })
 
-// Read and swagger config file
+// 读取接口的定义文件 swagger.yaml
 const apiDefinition = yaml.load(path.resolve(__dirname, 'swagger.yml'))
 // Create mock functions based on swaggerConfig
 const options = {
@@ -40,6 +40,8 @@ const options = {
     AccessTokenAuth: accessTokenAuth
   }
 }
+
+// 使用connector连接express与接口定义文件
 const connectSwagger = connector(api, apiDefinition, options)
 connectSwagger(app)
 // Print swagger router api summary
